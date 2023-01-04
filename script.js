@@ -19,7 +19,7 @@ while (playState === true) {
     console.log(choices[choiceNumber]);
 
     // player interaction
-    let playerChoice = prompt("rock, paper, or scissors");
+    let playerChoice = prompt("rock, paper, or scissors? (type it in)");
 
     // game logic
 
