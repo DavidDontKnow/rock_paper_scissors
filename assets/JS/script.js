@@ -1,72 +1,52 @@
-// play state
-playState = true
 
 // score tracker
 let wins = 0;
 let losses = 0;
 let ties = 0;
 
-// while play state true game plays
-while (playState === true) {
+// options
+const choices = ["rock", "paper", "scissors"];
 
-    // choice options
-    const choices = ["rock", "paper", "scissors"];
+// game 
+function playerMove() {
 
-    // random number generator 
-    const choiceNumber = Math.floor(Math.random() * choices.length);
+    // player option
+    let playerPick = prompt("rock, paper, or scissors? (type it in)");
+    playerPick = playerPick.toLowerCase();
 
-    // random number to array value
-    console.log(choices[choiceNumber]);
+    // CPU random number gen
+    let cpuNumber = Math.floor(Math.random() * choices.length);
 
-    // player interaction
-    let playerChoice = prompt("rock, paper, or scissors? (type it in)");
+    // parse to array value
+    let cpuPick = choices[cpuNumber];
+    console.log(cpuPick);
+
+    // inform player of CPU pick
+    alert("CPU chose " + cpuPick);
 
     // game logic
-
-    if (playerChoice.toLowerCase() === choices[choiceNumber]) {
-        ties = ties + 1;
-        alert("tie!");
-    } else if (playerChoice.toLowerCase() == "rock") {
-        if (choices[choiceNumber] == "paper") {
-            losses = losses + 1;
-            alert("you loser!")
-        } else {
-            wins = wins + 1;
-            alert("winner!")
-        }
-    } else if (playerChoice.toLowerCase() == "paper") {
-        if (choices[choiceNumber] == "scissors") {
-            losses = losses + 1;
-            alert("you loser!")
-        } else {
-            wins = wins + 1;
-            alert("winner!")
-        }
-    } else if (playerChoice.toLowerCase() == "scissors") {
-        if (choices[choiceNumber] == "rock") {
-            losses = losses + 1;
-            alert("you loser!")
-        } else {
-            wins = wins + 1;
-            alert("winner!")
-        }
-    };
-
-    // Score Printout 
-    alert("Here's The Score:\nWins: " + wins + "\nLosses: " + losses + "\nTies: " + ties)
-
-    // play again prompt
-    let playAgainPrompt = confirm("play again?");
-
-    // output changes game state to keep game going or end game
-    if (playAgainPrompt === true) {
-        playState = true;
+    if (playerPick === cpuPick) {
+        ties++;
+        alert("It's a Tie! 👔")
+    }
+    else if (playerPick === "rock" && cpuPick === "paper" ||
+        playerPick === "paper" && cpuPick === "scissors" ||
+        playerPick === "scissors" && cpuPick === "rock"
+    ) {
+        losses++;
+        alert("You Lost 😔");
     } else {
-        playState = false;
-    };
+        wins++;
+        alert("You Win! 🎉");
+    }
 
+    // play again 
+    alert("Here's The Score:\nWins: " + wins + "\nLosses: " + losses + "\nTies: " + ties);
+    const playMore = confirm("Want to play again?")
+    if (playMore) {
+        playerMove();
+    }
 }
 
-
-
-
+// first time game 
+playerMove()
